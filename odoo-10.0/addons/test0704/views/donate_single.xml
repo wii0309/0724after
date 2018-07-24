@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="donate_single_tree" model="ir.ui.view">
+            <field name="name">donatesingle.tree</field>
+            <field name="model">donate.single</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="donate_member"/>
+                    <field name="state"/>
+                    <field name="show_current_donate_total" string="捐款額"/>
+                    <field name="donate_date" string="捐款日期"/>
+                    <field name="receipt_send"/>
+                    <!--<field name="donate_family_list"/>-->
+                    <!--<field name="work_id"/>-->
+                    <field name="payment_method"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="donate_single_form" model="ir.ui.view">
+            <field name="name">donatesingle.form</field>
+            <field name="model">donate.single</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="button_to_cnacel_donate" string="作廢" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible='a,b,c' clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="add_to_list" string="產生捐款明細" type="object" class="oe_stat_button"
+                                    icon="fa-list" >
+                            </button>
+                        </div>
+                        <group col="9">
+                            <field name="donate_member" colspan="4" options="{'no_quick_create': True}"/>
+                            <field name="donate_date" colspan="3"/>
+                        </group>
+                        <group col="4">
+                            <field name="payment_method"/>
+                            <field name="name"/>
+                            <field name="donate_id"/>
+                            <field name="key_in_user"/>
+                            <field name="work_id"/>
+                            <field name="year_fee"/>
+                            <field name="rec_send"/>
+                            <field name="self_iden"/>
+                            <field name="cellphone"/>
+                            <field name="con_phone"/>
+                            <field name="zip_code"/>
+                            <field name="con_addr"/>
+                            <field name="zip"/>
+                            <field name="rec_addr"/>
+                            <field name="donate_total"/>
+                        </group>
+                        <span STYLE='FONT-SIZE:25PX'>寄送方式</span>
+                        <group col="2">
+                            <field name="receipt_send"/>
+                        </group>
+                        <group>
+                            <!--<field name="ps" string="Thanks for your:"/>-->
+                        </group>
+                        <notebook>
+                            <page string="捐款">
+                                <span STYLE='FONT-SIZE:25PX'>共同捐款項目</span>
+                                <group col="6">
+                                    <field name="bridge_money" string="A.造橋"/>
+                                    <field name="road_money" string="B.補路"/>
+                                    <field name="coffin_money" string="C.施棺"/>
+                                    <field name="poor_help_money" string="D.貧困扶助"/>
+                                    <field name="noassign_money" string="E.一般捐款"/>
+                                </group>
+                                <span STYLE='FONT-SIZE:25PX'>本戶捐款名冊</span>
+                                <group col="6">
+                                    <field name="show_current_donate_project"/>
+                                    <field name="show_current_donate_total"/>
+                                </group>
+                                <group>
+                                    <field name="current_donate_project" invisible="1"/>
+                                    <field name="current_donate_total" invisible="1"/>
+                                </group>
+                                <field name="family_check">
+                                    <tree editable="bottom" >
+                                        <field name="donate_member"/>
+                                        <field name="is_donate"/>
+                                        <field name="is_merge"/>
+                                        <field name="bridge_money" string="A.造橋"/>
+                                        <field name="road_money" string="B.補路"/>
+                                        <field name="coffin_money" string="C.施棺"/>
+                                        <field name="poor_help_money" string="D.貧困扶助"/>
+                                        <field name="noassign_money" string="E.一般捐款"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="禁止拍照">
+                                <span STYLE='FONT-SIZE:12PX'>沒</span>
+                                <field name="image" widget='image' class="oe_avatar" />
+                            </page>
+                            <page string="歷史捐款明細">
+                                <field name="donate_list">
+                                    <tree editable="bottom">
+                                        <field name="donate_member"/>
+                                        <!--<field name="state"/>-->
+                                        <!--<field name="con_phone"/>-->
+                                        <field name="payment_method"/>
+                                        <field name="donate_date"/>
+                                        <field name="bridge_money"/>
+                                        <field name="road_money"/>
+                                        <field name="coffin_money"/>
+                                        <field name="poor_help_money"/>
+                                        <field name="noassign_money"/>
+                                        <!--<field name="donate_member" invisible = "1"/>-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="donate_single_view_action" model="ir.actions.act_window">
+            <field name="name">捐款作業</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">donate.single</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <menuitem id="donate_single_action" name="捐款作業" parent="another_menu" action="donate_single_view_action"/>
+    </data>
+</odoo>
