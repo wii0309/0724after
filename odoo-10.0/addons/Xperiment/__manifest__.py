@@ -19,7 +19,6 @@
     'data': [
         'view/hrexpense.xml',
         'view/hrexpense_view.xml',
-        # 'view/accountmove.xml',
 
     ],
     # only loaded in demonstration mode
